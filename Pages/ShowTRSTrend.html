@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head>  
+    <meta charset="UTF-8"> 
+    <title>TRS Trend</title>  
+    <link href="/Common/css/layout.datein.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/Common/ThirdPart/datepicker/css/datepicker.css" />
+    <script type="text/javascript" src="/Common/ThirdPart/datepicker/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="/Common/ThirdPart/datepicker/js/datepicker.js"></script> 
+    <script type="text/javascript" src="/Common/js/highcharts.js"></script>
+
+<style type="text/css">
+.loadingstyle{
+ border:5px solid #939393;
+ width:250px;
+ height:50px;
+ line-height:55px;
+ padding:0 20px;
+ position:absolute;
+ left:50%;
+ margin-left:-140px;
+ top:50%;
+ margin-top:-40px;
+ font-size:15px;
+ color:#333;
+ z-index:10000;
+ font-weight:bold;
+ text-align:center;
+ background-color:#f9f9f9;
+ display:none;
+}
+.loadingstyle img{position:relative;top:10px;left:-8px;}
+</style>
+
+</head>
+<body>
+        <div style="height:30px; margin-left:10px;margin-top:6px;">                  
+           <span style="font-size:12px;">
+               Line: 
+            <select id ="fLine" class='rosDrop LineSelect'>
+            <option Selected>SHT1</option>
+            <option>SHT2</option>
+            <option>SHT3</option>
+            <option>WA1</option>
+            <option>WA2</option>
+            <option>WA3</option>
+            <option>WA4</option>
+            <option>WA5</option>
+            <option>WA12</option>
+            <option>WA13</option>
+            <option>WA14</option>
+            <option>WA15</option>
+            <option>WA16</option>
+            <option>WA17</option>
+            <option>WA18</option>
+            <option>WA19</option>
+            </select> 
+               From: <input class="inputDate" id="fDate" value="" /> To: <input class="inputDate" id="tDate" value="" /> Standard Value:<input type="text" id="stValue" value="80" /></span>
+            <input type="button" class="pageBtn preBtn" value="Refresh" />
+            <div id="loadingdiv" class="loadingstyle">
+               <img src="../../Common/images/wait.gif" />正在查询，请稍等...
+            </div>
+        </div>
+      <!--曲线图  start-->
+        <div class="fg-curve">
+           <div id="ContainerSpline" style="min-width: 1050px; height: 580px; margin: 0 auto"></div>
+        </div>
+      <!--曲线图  end-->
+</body>
+<script type="text/javascript">
+
+    function show_query_hint(query_hint) {
+        //var query_hint = document.getElementById(query_hint);
+        //query_hint.style.display = "block";
+        $("#loadingdiv").show();
+    }
+
+    function queryHintCallback(query_hint) {
+        //var query_hint = document.getElementById(query_hint);
+        //query_hint.style.display = "none";
+        $("#loadingdiv").hide();
+    }
+
+    function LoadTRSTrendData(whichLine,fromDate,toDate) {
+        var line = whichLine;
+        var url = "/service/MW_GetTRSOfTrend.ashx?Line=" + line + "&DayFrom=" + fromDate + " &DayTo=" + toDate;
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (data) {
+                var categories = [];
+                var aVolume = [];
+                var sVolume = [];
+                var trs = 0.00;
+                var stv = $("#stValue").val().toString();
+                
+                $.each(data.Trend, function (idx, item) {
+                    categories.push(item.Point);
+                    aVolume.push(parseFloat(item.TRS) * 100);
+                    sVolume.push(parseFloat(stv));
+                }
+                );
+
+                var objTrend = {
+                    "categories": categories,
+                    "aVolume": aVolume,
+                    "sVolume": sVolume
+                };
+
+                queryHintCallback("loadingdiv");
+
+                  LoadTrend(objTrend);         
+            },
+
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.status);
+                //alert(XMLHttpRequest.readyState);
+                queryHintCallback("loadingdiv");
+                alert(textStatus);
+            }
+
+        });
+    }
+
+  function LoadTrend(obj) {
+        $('#ContainerSpline').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: obj.categories
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            plotOptions: {
+                spline: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                color: '#79bb5d',
+                name: '标准TRS',
+                marker: {
+                    //symbol: 'square'
+                },
+                data: obj.sVolume
+
+            }, {
+                color: '#22ade8',
+                name: '实际TRS',
+                marker: {
+                    symbol: 'diamond'
+                },
+                data: obj.aVolume
+            }]
+        });
+  }
+
+  $(".preBtn").click(function () {
+      var vf = $("#fDate").val().toString();
+      var vt = $("#tDate").val().toString();
+      var line = $("#fLine").text;
+
+      if (!compareDateTime(vf,vt))
+      {
+          alert("截止日期应在起始日期之后!");
+          return;
+      }
+      show_query_hint("loadingdiv");
+      LoadTRSTrendData(line,vf, vt);
+  });
+
+  $(function () {
+      
+      $('#fDate').DatePicker({
+          format: 'Y-m-d',
+          date: $('#fDate').val(),
+          currentText: 'Today',
+          starts: 7,
+          position: 'r',
+          onBeforeShow: function () {
+              $('#fDate').DatePickerSetDate(new Date(), true);
+          },
+          onChange: function (formated, dates) {
+              $('#fDate').val(formated);
+              $('#fDate').DatePickerHide();
+          }
+      });
+      
+      $('#tDate').DatePicker({
+          format: 'Y-m-d',
+          date: $('#tDate').val(),
+          currentText: 'Today',
+          starts: 7,
+          position: 'r',
+          onBeforeShow: function () {
+              $('#tDate').DatePickerSetDate(new Date(), true);
+          },
+          onChange: function (formated, dates) {
+              $('#tDate').val(formated);
+              $('#tDate').DatePickerHide();
+          }
+      });
+
+  });
+
+ function compareDateTime(startTime, endTime) {
+        return ((new Date(endTime.replace(/-/g, "/"))) > (new Date(
+                startTime.replace(/-/g, "/"))));
+ }
+
+</script>
+</html>

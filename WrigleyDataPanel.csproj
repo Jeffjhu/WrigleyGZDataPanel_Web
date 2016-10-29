@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AF4075B1-960C-489E-A1A2-61FB9B22AF7C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WrigleyDataPanel</RootNamespace>
+    <AssemblyName>WrigleyDataPanel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\WrigleyDataPanel.dll" />
+    <Content Include="bin\WrigleyDataPanel.pdb" />
+    <Content Include="Common\css\layout.datein.css" />
+    <Content Include="Common\css\theme.css" />
+    <Content Include="Common\images\part3_btn_cur.png" />
+    <Content Include="Common\images\topBg.png" />
+    <Content Include="Common\images\trs_btn_cur.png" />
+    <Content Include="Common\images\trs_btn_nor.png" />
+    <Content Include="Common\images\wait.gif" />
+    <Content Include="Common\js\exporting.js" />
+    <Content Include="Common\js\highcharts.js" />
+    <Content Include="Common\js\jquery-1.7.2.js" />
+    <Content Include="Common\js\legacy.min.js" />
+    <Content Include="Common\js\StyleJs.js" />
+    <Content Include="Common\ThirdPart\datepicker\css\datepicker.css" />
+    <Content Include="Common\ThirdPart\datepicker\css\layout.css" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_b.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_bl.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_br.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_l.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_r.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_t.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_tl.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\custom_tr.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_b.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_bl.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_br.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_l.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_r.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_t.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_tl.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\datepicker_tr.png" />
+    <Content Include="Common\ThirdPart\datepicker\images\field.png" />
+    <Content Include="Common\ThirdPart\datepicker\js\datepicker.js" />
+    <Content Include="Common\ThirdPart\datepicker\js\eye.js" />
+    <Content Include="Common\ThirdPart\datepicker\js\jquery-1.4.2.min.js" />
+    <Content Include="Common\ThirdPart\datepicker\js\jquery.js" />
+    <Content Include="Common\ThirdPart\datepicker\js\layout.js" />
+    <Content Include="Common\ThirdPart\datepicker\js\utils.js" />
+    <Content Include="Common\ThirdPart\jBox\i18n\jquery.jBox-zh-CN.js" />
+    <Content Include="Common\ThirdPart\jBox\jquery-1.4.2.min.js" />
+    <Content Include="Common\ThirdPart\jBox\jquery.jBox-2.3.min.js" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Blue\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Gray\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Green\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Pink\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Purple\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\Yellow\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins2\样式说明%28以Green皮肤为例%29.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Blue\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Brown\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Default\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GrayCool\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Gray\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Green\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\GreyBlue\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Purple\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\Red\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBlue\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareBrown\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareGreen\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\SharePurple\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-button1.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-button2.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-close1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-close2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-content-loading.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-icons-ie6.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-icons.png" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading1.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading2.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading3.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-title-icon.gif" />
+    <Content Include="Common\ThirdPart\jBox\Skins\ShareRed\jbox.css" />
+    <Content Include="Common\ThirdPart\jBox\Skins\样式说明%28以Default皮肤为例%29.css" />
+    <Content Include="index.html" />
+    <Content Include="obj\Release\Package\PackageTmp\bin\WrigleyDataPanel.dll" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\css\layout.datein.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\css\theme.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\images\part3_btn_cur.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\images\topBg.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\images\trs_btn_cur.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\images\trs_btn_nor.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\js\exporting.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\js\highcharts.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\js\jquery-1.7.2.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\js\legacy.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\js\StyleJs.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\css\datepicker.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\css\layout.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_b.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_bl.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_br.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_l.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_r.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_t.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_tl.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\custom_tr.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_b.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_bl.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_br.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_l.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_r.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_t.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_tl.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\datepicker_tr.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\images\field.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\datepicker.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\eye.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\jquery-1.4.2.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\jquery.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\layout.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\datepicker\js\utils.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\i18n\jquery.jBox-zh-CN.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\jquery-1.4.2.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\jquery.jBox-2.3.min.js" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Blue\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Gray\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Green\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Pink\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Purple\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\Yellow\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins2\样式说明%28以Green皮肤为例%29.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Blue\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Brown\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Default\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GrayCool\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Gray\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Green\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\GreyBlue\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Purple\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\Red\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBlue\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareBrown\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareGreen\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\SharePurple\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-button1.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-button2.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-close1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-close2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-content-loading.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-icons-ie6.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-icons.png" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading1.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading2.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-loading3.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\images\jbox-title-icon.gif" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\ShareRed\jbox.css" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\Skins\样式说明%28以Default皮肤为例%29.css" />
+    <Content Include="obj\Release\WrigleyDataPanel.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\WrigleyDataPanel.dll" />
+    <Content Include="obj\Release\WrigleyDataPanel.pdb" />
+    <Content Include="obj\Release\_WPPLastBuildInfo.txt" />
+    <Content Include="Pages\ExportTRSRecord.aspx" />
+    <Content Include="Pages\ShowTRSTrend.html" />
+    <Content Include="Panels\SHT\ShowTRSLossOfParts.html" />
+    <Content Include="Panels\SHT\SHT1.html" />
+    <Content Include="Panels\SHT\SHT2.html" />
+    <Content Include="Panels\SHT\SHT3.html" />
+    <Content Include="Panels\WA\WA1.html" />
+    <Content Include="Panels\WA\WA14.html" />
+    <Content Include="Panels\WA\WA17.html" />
+    <Content Include="Panels\WA\WA18.html" />
+    <Content Include="Panels\WA\WA4.html" />
+    <Content Include="Panels\WA\WA19.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\cs\Kit.cs" />
+    <Compile Include="Pages\ExportTRSRecord.aspx.cs">
+      <DependentUpon>ExportTRSRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ExportTRSRecord.aspx.designer.cs">
+      <DependentUpon>ExportTRSRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\MW_DowntimeHandler.ashx.cs">
+      <DependentUpon>MW_DowntimeHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_GetMTTR_MTBF_MDT.ashx.cs">
+      <DependentUpon>MW_GetMTTR_MTBF_MDT.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_GetTRSOfTrend.ashx.cs">
+      <DependentUpon>MW_GetTRSOfTrend.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_MainTRSLossHandler.ashx.cs">
+      <DependentUpon>MW_MainTRSLossHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_RunningInfoHandler.ashx.cs">
+      <DependentUpon>MW_RunningInfoHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_TRSLossHandler.ashx.cs">
+      <DependentUpon>MW_TRSLossHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Service\MW_VolumeHandler.ashx.cs">
+      <DependentUpon>MW_VolumeHandler.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\ThirdPart\jBox\LGPL-LICENSE" />
+    <Content Include="Common\ThirdPart\jBox\MIT-LICENSE" />
+    <Content Include="Service\MW_DowntimeHandler.ashx" />
+    <Content Include="Service\MW_MainTRSLossHandler.ashx" />
+    <Content Include="Service\MW_TRSLossHandler.ashx" />
+    <Content Include="Service\MW_VolumeHandler.ashx" />
+    <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\LGPL-LICENSE" />
+    <Content Include="obj\Release\Package\PackageTmp\Common\ThirdPart\jBox\MIT-LICENSE" />
+    <Content Include="obj\Release\Package\PackageTmp\Service\MW_DowntimeHandler.ashx" />
+    <Content Include="obj\Release\Package\PackageTmp\Service\MW_MainTRSLossHandler.ashx" />
+    <Content Include="obj\Release\Package\PackageTmp\Service\MW_TRSLossHandler.ashx" />
+    <Content Include="obj\Release\Package\PackageTmp\Service\MW_VolumeHandler.ashx" />
+    <Content Include="obj\Release\TransformWebConfig\assist\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\original\Web.config" />
+    <Content Include="obj\Release\TransformWebConfig\transformed\Web.config" />
+    <Content Include="Service\MW_GetTRSOfTrend.ashx" />
+    <Content Include="Service\MW_RunningInfoHandler.ashx" />
+    <Content Include="Panels\WA\WA2.html" />
+    <Content Include="Panels\WA\WA3.html" />
+    <Content Include="Panels\WA\WA5.html" />
+    <Content Include="Panels\WA\WA12.html" />
+    <Content Include="Panels\WA\WA16.html" />
+    <Content Include="Panels\WA\WA13.html" />
+    <Content Include="Panels\WA\WA15.html" />
+    <None Include="Properties\PublishProfiles\WrigleyDataPanel.pubxml" />
+    <Content Include="Service\MW_GetMTTR_MTBF_MDT.ashx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\Package\PackageTmp\obj\Debug\" />
+    <Folder Include="obj\Release\Package\PackageTmp\Panels\SHT\" />
+    <Folder Include="obj\Release\Package\PackageTmp\Panels\WA\" />
+    <Folder Include="obj\Release\ProfileTransformWebConfig\transformed\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2154</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2008/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

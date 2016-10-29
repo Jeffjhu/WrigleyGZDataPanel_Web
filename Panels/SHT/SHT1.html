@@ -1,0 +1,866 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+   <!--LoadTRSLoss和LoadDowtime需要修改,将LoadTRSLoss放在LoadDowntime中-->
+    <title>DataPanel - SHT - SHT1</title>
+    <link href="/Common/css/layout.datein.css" rel="stylesheet" />
+    <link href="/Common/ThirdPart/jBox/Skins/Default/jbox.css" rel="stylesheet" />
+    <script src="/Common/js/jquery-1.7.2.js"></script>
+    <script src="/Common/js/highcharts.js"></script>
+    <script type="text/javascript" src="/Common/ThirdPart/jBox/jquery.jBox-2.3.min.js"></script>
+    <script type="text/javascript" src="/Common/ThirdPart/jBox/i18n/jquery.jBox-zh-CN.js"></script>
+    <script type="text/javascript">
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "/";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                    + " " + (date.getHours().toString().length == 1 ? "0" + date.getHours() : date.getHours()) + seperator2
+                    + (date.getMinutes().toString().length == 1 ? "0" + date.getMinutes() : date.getMinutes()) + seperator2
+                    + (date.getSeconds().toString().length == 1 ? "0" + date.getSeconds() : date.getSeconds());
+
+            return currentdate;
+        }
+
+        function ShowCurrentDate() {
+          $(".fg-time").text("时间：" + getNowFormatDate());
+        }
+
+    </script>
+</head>
+<body>
+    <div class="fg-box">
+        <div class="fg-top">
+            <h2 class="fgTitle">MFG生产数据展示板</h2>
+            <p class="fg-det">
+                <span class="fg-time"></span>
+                <span class="fg-line">生产线：SHT1</span>
+                <span class="fg-glass shift">班次： </span>
+            </p>
+
+            <div class="fg-stage fg-stageFirst">
+                <span class="fg-font running">未知</span>
+            </div>
+            <div class="fg-botSecond">当前生产状态</div>
+
+            <div class="fg-stage fg-stageSecond" style="background-color:rgb(103, 241, 44)">
+                <span class="fg-font">未知</span>
+            </div>
+            <div class="fg-botFirst">实时TRS</div>
+
+        </div>
+
+        <div class="fg-explain">
+            <!--左边内容区域 start-->
+            <div class="exLeft">
+                <h2 class="exTit">产量 </h2>
+                <span class="ex-titEn">Volume</span>
+                <div class="outDet">
+                    <p class="grenItem">
+                        <span class="out-tit">目标TRS:</span>
+                        <span class="out-num">85%</span>
+                        <span class="out-tit">目标产量:</span>
+                        <span class="out-num svolume"></span>
+                        <span class="out-tit">时间进度:</span>
+                        <span class="out-num timeProgress"></span>
+                    </p>
+                    <p class="cyanItem">
+                        <span class="out-tit">实际产量:</span>
+                        <span class="out-num avolume"></span>
+                        <span class="out-tit">实时TRS:</span>
+                        <span class="out-num complateRate"></span>
+                    </p>
+                </div>
+
+                <!--曲线图  start-->
+                <div class="fg-curve">
+                    <div id="ContainerSpline" style="min-width: 310px; height: 270px; margin: 0 auto"></div>
+                </div>
+                <!--曲线图  end-->
+
+                <div class="fg-colu">
+                    <div class="coluDet">
+                        <h2 class="exTit">主要TRS损失 </h2>
+                        <span class="stopRect"></span>
+                        <span class="out-tit">停机时间</span>
+                    </div>
+                    <!--柱形图  start-->
+                    <div class="curPic">
+                        <div id="container" style="min-width: 300px; height: 270px; margin: 0 auto"></div>
+                    </div>
+                    <!--柱形图  end-->
+                </div>
+            </div>
+            <!--左边内容区域 end-->
+
+            <!--右边内容区域 start-->
+            <div class="exRight">
+                <p class="loss-tit">主要TRS损失</p>
+                <div class="rosDate">
+                    <table class="rosTable trsLoss" cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <thead>
+                            <tr>
+                                <td>项</td>
+                                <td>停机类别</td>
+                                <td>停机区域</td>
+                                <td>停机原因</td>
+                                <td>停机时间段</td>
+                                <td>时长</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <!--分页 start-->
+                <div class="pageHome">
+                    <input type="button" class="pageBtn expBtn" value="导出停机记录" />
+                    <input type="button" class="pageBtn preBtn" value="上一页" />
+                    <input type="button" class="pageBtn nexBtn" value="下一页" />
+                    <input type="button" class="pageBtn stopBtn" value="暂停" />
+                    <input type="button" class="pageBtn saveBtn" value="保存" />
+                </div>
+                <!--分页 end-->
+
+                <p class="greenEnd">当前生产速度：<span class="ASpeed">actual speed</span>片／分钟</p>
+                <p class="greenEnd">标准生产速度：<span class="SSpeed">standard speed</span>片／分钟</p>
+                <p class="greenEnd">最小开机时长：<span class="minDuration">min</span> 分钟</p>
+                <p class="greenEnd">最大开机时长：<span class="maxDuration">max</span> 分钟</p>
+                <p class="greenEnd">平均开机时长：<span class="avgDuration">avg</span> 分钟</p>
+                <p class="greenEnd">MTTR：<span class="mttr">mttr</span> MTBF：<span class="mtbf">mtbf</span> MDT ： <span class="mdt">mdt</span></p>
+                <input type="button" class="trsBtn" value="" />
+                <input type="button" class="part3Btn" value="" />
+            </div>
+            <!--右边内容区域 end-->
+
+            <!--清除浮动 start-->
+            <div class="clear"></div>
+            <!--清除浮动 end-->
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    var timerId = 0; //控制停机数据刷新定时器对象
+    var pageCount = 0;
+    var pageSize = 10;
+    var pageIndex = 1;
+
+    //格式化日期
+    function GetYMD(dt) {
+        var date = new Date(dt);
+        var seperator1 = "/";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        return date.getFullYear() + "/" + month + "/" + strDate
+    }
+
+    function GetShift(sdt) {
+        var dt = new Date(sdt);
+        var hour = dt.getHours();
+        var min = dt.getMinutes();
+        var shift = 0;
+
+        //1:00 - 8:30
+        if (((hour >= 1) && (hour < 8)) || ((hour == 8) && (min <= 30)))
+            shift = 1;
+            //8:30 - 17:00
+        else if (((hour > 8) && (hour < 17)) || ((hour == 8) && (min > 30)) || ((hour == 17) && (min == 0)))
+            shift = 2;
+        else
+            //17:00 - 1:00
+            shift = 3;
+        return shift;
+    }
+
+    /**********************加载柱状图*************************/
+
+    function LoadMainTrsLossData() {
+        // 加载柱状图数据
+        var line = "SHT1";
+        var sUrl = "/Service/MW_MainTRSLossHandler.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+        $.ajax({
+            url: sUrl,
+            type: "get",
+            datatype: "json",
+            success: function (sData) {
+                var arr = [];
+                for (var i = 0; i < sData.length; i++) {
+                    var obj = sData[i];
+                    arr.push([obj["Reason"], parseFloat(obj["tolTimeSpan"])]);
+                }
+                LoadMainTrsLoss(arr);
+            },
+            error: function () {
+                //
+            }
+        });
+    }
+    function LoadMainTrsLoss(arr) {
+
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '{point.y:.2f}'
+            },
+            series: [{
+                name: 'TRSLoss',
+                data: arr,
+                color: '#79bb5d',
+                dataLabels: {
+                    enabled: true,
+                    color: '#FFFFFF',
+                    align: 'center',
+                    format: '{point.y:.2f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }]
+        });
+
+    }
+
+    function LoadTrsLossData() {
+        var line = "SHT1";
+        var url = "/Service/MW_TRSLossHandler.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (objData) {
+                var data = objData["TRSLoss"];
+                var tbHtml = "";
+
+                if (!data) return;
+
+                for (var i = 0; i < data.length; i++) {
+                    var dr = data[i];
+                    tbHtml += "<tr myattr='" + dr["Id"] + "'>";
+                    tbHtml += "<td>" + (i + 1) + "</td>";
+                    tbHtml += "<td class='tdLeft'>" + AppendDownTimeClass(dr["DownTimeClass"]) + "</td>";
+
+                    if (dr["DownTimeCode"]) {
+                        tbHtml += "<td class='tdLeft'>" + AppendDownTimeArea({ DownTimeClass: dr["DownTimeClass"], DownTimeArea: dr["DownTimeArea"] }) + "</td>";
+                    } else {
+                        tbHtml += "<td class='tdLeft'>" + AppendDownTimeArea() + "</td>";
+                    }
+
+                    if (dr["DownTimeCode"]) {
+                        tbHtml += "<td class='tdLeft'>" + AppendDownTimeCode({ DownTimeClass: dr["DownTimeClass"], DownTimeArea: dr["DownTimeArea"], DownTimeCode: dr["DownTimeCode"] }) + "</td>";
+                    } else {
+                        tbHtml += "<td class='tdLeft'>" + AppendDownTimeCode() + "</td>";
+                    }
+
+                    tbHtml += "<td>" + dr["Stime"] + "~" + dr["Etime"] + "</td>";
+                    tbHtml += "<td>" + dr["Duration"] + "</td>";
+                    tbHtml += "</tr>";
+                }
+
+                $(".trsLoss").find("tbody").html(tbHtml);
+
+                var str = objData["RUNNING"] == 0 ? "停机" : "开机";
+                $(".running").text(str);
+
+                if (objData["RUNNING"] == 0) {
+                    $(".fg-stageFirst").css("backgroundColor", "#F70021");
+                } else {
+                    $(".fg-stageFirst").css("backgroundColor", "#67F12C");
+                }
+
+                var trLength = data.length;
+                pageIndex = 1;
+                pageCount = Math.ceil(trLength / pageSize);
+                PageShow(pageIndex);
+            },
+            error: function () {
+                //
+            }
+        });
+
+    }
+
+    /**********************加载折线图*************************/
+    function LoadVolumeData() {
+        var line = "SHT1";
+        var url = "/Service/MW_VolumeHandler.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (data) {
+                var categories = [];
+                var aVolume = [];
+                var sVolume = [];
+                var trs = [];
+                var trsVol = [];
+                var tRate = 0.00;
+                var lastCode = "";
+                var spanCnt = 0;
+                var sv = 0.00;
+                var av = 0.00;
+                var vRate = 0.00;
+                var lastASpeed = 0.00;
+                var lastSSpeed = 0.00;
+
+                if (!data) return;
+
+                for (var i = 0 ; i < data.length; i++) {
+                    var dr = data[i];
+                    categories.push(dr["xPoint"]);
+
+                    if (dr["Status"] != "-1") {
+                        aVolume.push(parseFloat(dr["aVolume"]));
+
+                        if (lastCode == "") {
+                            spanCnt = 0;
+                            //spanCnt = 1;
+                            lastCode = dr["RecipeCode"];
+                            sVolume.push(0);
+                            //sVolume.push(Math.ceil(parseFloat(dr["sVolume"]) * 30 * 0.85 * spanCnt));
+                            trs.push(0);
+                            trsVol.push(0);
+                            //trs.push(aVolume[aVolume.length - 1] / sVolume[sVolume.length - 1]);
+                            //trsVol.push(sVolume[sVolume.length - 1]);
+                        }
+                        else {
+                                     if (dr["RecipeCode"] == lastCode) {
+                                       spanCnt++;
+                                       sVolume.push(Math.ceil(parseFloat(dr["sVolume"]) * 30 * 0.85 * spanCnt));
+                                       trs[trs.length - 1] = aVolume[aVolume.length - 1] / sVolume[sVolume.length - 1];
+                                       trsVol[trsVol.length - 1] = sVolume[sVolume.length - 1];
+                            }
+                            else {
+                                spanCnt = 0;
+                                //spanCnt = 1;
+                                lastCode = dr["RecipeCode"];
+                                sVolume.push(0);
+                                //sVolume.push(Math.ceil(parseFloat(dr["sVolume"]) * 30 * 0.85 * spanCnt));
+                                trs.push(0);
+                                trsVol.push(0);
+                                //trs.push(aVolume[aVolume.length - 1] / sVolume[sVolume.length - 1]);
+                                //trsVol.push(sVolume[sVolume.length - 1]);
+                            }
+                        }
+                             lastASpeed = dr["aSpeed"];
+                             lastSSpeed = dr["sSpeed"];
+                             tRate = dr["TcompleteRate"] * 100;
+                    }
+                    else {
+                                 aVolume.push(null);
+                                 sVolume.push(null);
+                    }
+
+                }
+
+                var tolActualVol = 0.00;
+                var tolStandVol = 0.00;
+
+                for (j = 0; j < trs.length; j++) {
+                    tolActualVol += trsVol[j] * trs[j];
+                    tolStandVol += trsVol[j];
+                }
+
+                if (tolStandVol > 0) vRate = tolActualVol / tolStandVol / 0.85 * 100;
+
+                $(".svolume").text(tolStandVol.toFixed(2) + " Kg");//理论产量
+                $(".avolume").text(tolActualVol.toFixed(2) + " Kg");//实际产量
+                $(".complateRate").text(vRate.toFixed(2) + "%");//产量完成率
+                $(".timeProgress").text(tRate.toFixed(2) + "%"); //时间进度
+
+                $(".fg-stageSecond").find("span").text(vRate.toFixed(2) + "%");
+                if (vRate < 0.85) {
+                    $(".fg-stageSecond").css("backgroundColor", "#F70021");
+                } else {
+                    $(".fg-stageSecond").css("backgroundColor", "#67F12C");
+                }
+
+                $(".ASpeed").text(lastASpeed.toString());//实际生产速度
+                $(".SSpeed").text(lastSSpeed.toString());//标准生产速度
+                if (lastASpeed != lastSSpeed) {
+                    $(".ASpeed").css("color", "red");
+                }
+
+                switch (GetShift(getNowFormatDate())) {
+                    case 1:
+                        $(".shift").text("班次：夜班");
+                        break;
+                    case 2:
+                        $(".shift").text("班次：早班");
+                        break;
+                    case 3:
+                        $(".shift").text("班次：中班");
+                        break;
+                    default:
+                        break;
+                }
+
+                var obj = {
+                    "categories": categories,
+                    "aVolume": aVolume,
+                    "sVolume": sVolume
+                };
+
+                  LoadVolume(obj);
+
+            },
+            error: function () {
+                //
+            }
+        });
+    }
+
+    function LoadVolume(obj) {
+        $('#ContainerSpline').highcharts({
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: obj.categories
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            plotOptions: {
+                spline: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [
+                {
+                    color: '#79bb5d',
+                    name: '计划产量',
+                    marker: {
+                        symbol: 'square'
+                    },
+                    data: obj.sVolume
+
+                }, {
+                    color: '#22ade8',
+                    name: '实际产量',
+                    marker: {
+                        symbol: 'diamond'
+                    },
+                    data: obj.aVolume
+                }
+            ]
+        });
+    }
+
+    function LoadDownTime() {
+        var line = "SHT";
+        var url = "/Service/MW_DownTimeHandler.ashx?Line=" + line;
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (data) {
+                $(".trsLoss").data("Downtime", data);
+                LoadTrsLossData();
+            },
+            error: function () {
+                //
+            }
+        });
+    }
+
+    function AppendDownTimeClass(value) {
+        var data = $(".trsLoss").data("Downtime");
+        /*
+        if (data == null || data == "" || data == undefined) {
+            LoadDownTime();
+            data = $(".trsLoss").data("Downtime");
+        }
+        */
+        var optionHtml = "<select class='rosSel downTimeClass'>";
+        optionHtml += "<option value=''>请选择</option>";
+
+        if (value) {
+            if (value == "Plan downtime") {
+                optionHtml += "<option value='Plan downtime' selected='selected' >计划停机</option>";
+                optionHtml += "<option value='Unplan downtime'>非计划停机</option>";
+            } else {
+                optionHtml += "<option value='Plan downtime' >计划停机</option>";
+                optionHtml += "<option value='Unplan downtime' selected='selected'>非计划停机</option>";
+            }
+
+        } else {
+            optionHtml += "<option value='Plan downtime' >计划停机</option>";
+            optionHtml += "<option value='Unplan downtime' >非计划停机</option>";
+        }
+          optionHtml += "</select>";
+          return optionHtml;
+    }
+
+    function AppendDownTimeCode(value) {
+        var data = $(".trsLoss").data("Downtime");
+        /*
+        if (data == null || data == "" || data == undefined) {
+            LoadDownTime();
+            data = $(".trsLoss").data("Downtime");
+        }
+        */
+        var optionHtml = "<select class='rosSel downTimeCode'>";
+        optionHtml += "<option value=''>请选择</option>";
+        if (value) {
+            var subdata;
+            if (value["DownTimeClass"] == "Plan downtime") {
+                subdata = data["PDownTime"];
+            } else {
+                subdata = data["UDownTime"];
+            }
+
+            for (var i = 0; i < subdata.length; i++) {
+                var obj = subdata[i];
+                if (value["DownTimeArea"] == obj["DowntimeArea"]) {
+                    if (value["DownTimeCode"] == obj["DowntimeCode"]) {
+                        optionHtml += "<option value='" + obj["DowntimeCode"] + "' selected='selected'>" + obj["Reason"] + "</option>";
+                    }
+                    else {
+                        optionHtml += "<option value='" + obj["DowntimeCode"] + "'>" + obj["Reason"] + "</option>";
+                    }
+                }
+            }
+        }
+            optionHtml += "<select>";
+            return optionHtml;
+    }
+
+
+    function AppendDownTimeArea(value) {
+        var data = $(".trsLoss").data("Downtime");
+        /*
+        if (data == null || data == "" || data == undefined) {
+            LoadDownTime();
+            data = $(".trsLoss").data("Downtime");
+        }
+        */
+        var optionHtml = "<select class='rosSel downTimeArea'>";
+        optionHtml += "<option value=''>请选择</option>";
+        if (value) {
+            var subdata;
+            if (value["DownTimeClass"] == "Plan downtime") {
+                subdata = data["PDownTime"];
+            } else {
+                subdata = data["UDownTime"];
+            }
+
+            var arr = []; //停机区域
+            var downtimeArea = "";
+            for (var i = 0; i < subdata.length; i++) {
+                var obj = subdata[i];
+                if (arr.indexOf(obj["DowntimeArea"]) == -1) {
+                    arr.push(obj["DowntimeArea"]);
+                }
+
+                if (value["DownTimeArea"] == obj["DowntimeArea"]) {
+                    downtimeArea = obj["DowntimeArea"];
+                }
+            }
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == downtimeArea) {
+                    optionHtml += "<option value='" + arr[i] + "'  selected='selected'>" + arr[i] + "</option>";
+                } else {
+                    optionHtml += "<option value='" + arr[i] + "'>" + arr[i] + "</option>";
+                }
+            }
+
+        }
+            optionHtml += "<select>";
+            return optionHtml;
+    }
+
+    //加载开机时长统计
+    function LoadRunningInfo() {
+        var line = "SHT1";
+        var url = "/Service/MW_RunningInfoHandler.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (data) {
+                var rdata = data["RunningInfo"];
+                var mydata = rdata[0];
+                var min = mydata["minDuration"];
+                var max = mydata["maxDuration"];
+                var avg = mydata["avgDuration"];
+
+                if (isNaN(avg)) avg = 0.00;
+
+                $(".minDuration").text(min);
+                $(".maxDuration").text(max);
+                $(".avgDuration").text(parseFloat(avg).toFixed(2));
+            }
+        });
+    }
+
+    //加载MTTR,MTBF,MDT
+    function LoadMTTR() {
+        var line = "SHT1";
+        var url = "/Service/MW_GetMTTR_MTBF_MDT.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+        $.ajax({
+            url: url,
+            type: "get",
+            datatype: "json",
+            success: function (data) {
+                var rdata = data["MTTR"];
+                var mydata = rdata[0];
+                var tRun = parseFloat(mydata["totalRunning"]);
+                var tStop = parseFloat(mydata["totalStopping"]);
+                var tTimes = parseFloat(mydata["totalTimes"]);
+
+                var mttr = 0;
+                var mtbf = 0;
+                var mdt = tTimes;
+
+                if (tTimes > 0) {
+                    mttr = (tStop / tTimes).toFixed(2);
+                    mtbf = (tRun / tTimes).toFixed(2);
+                }
+
+                $(".mttr").text(mttr);
+                $(".mtbf").text(mtbf);
+                $(".mdt").text(mdt);
+            }
+        });
+    }
+
+    //页面加载，加载初始数据
+    $(function () {
+
+        ShowCurrentDate();//显示当前时间
+
+        LoadDownTime();//载装停机基础信息
+
+        LoadVolumeData();// 加载产量数据
+
+        LoadRunningInfo();//加载开机统计
+
+        LoadMTTR();//计算MTTR MTBF MDT
+
+        //设置记时器,可控制停机记录的自动刷新
+        timerId = setInterval(LoadTrsLossData, 1000 * 30);
+
+        setTimeout(LoadMainTrsLossData, 1000 * 30);
+
+        setInterval(LoadVolumeData, 1000 * 30);
+
+        setInterval(LoadRunningInfo, 1000 * 30);
+
+        setInterval(LoadMTTR, 1000 * 30);
+
+        setInterval(ShowCurrentDate, 1000 * 60);
+
+        //停机类别选择
+        $(".downTimeClass").live("change", function () {
+            var td = $(this).parents("tr", "tbody").eq(0).find("td").eq(2);
+            var td2 = null;
+            var value = $(this).val() == "" ? null : { DownTimeClass: $(this).val(), DownTimeArea: "" };
+            td.html(AppendDownTimeArea(value));
+            if ($(this).val() == null || $(this).val() == "" || $(this).val() == undefined) {
+                td2 = $(this).parents("tr", "tbody").eq(0).find("td").eq(3);
+                td2.html(AppendDownTimeCode());
+            }
+        });
+
+        //停机区域选择
+        $(".downTimeArea").live("change", function () {
+            var cls = $(".downTimeClass");
+            var td = $(this).parents("tr", "tbody").eq(0).find("td").eq(3);
+            var value = $(this).val() == "" ? null : { DownTimeClass: cls.val(), DownTimeArea: $(this).val(), DownTimeCode: "" };
+            td.html(AppendDownTimeCode(value));
+        });
+
+        //获取填写停机项的数据
+        $(".saveBtn").click(function () {          
+            var data = [];
+            $(".downTimeCode").each(function () {
+                var selEle = $(this);
+                var tr = $(this).parents("tr").eq(0);
+                var obj = {
+                    'id': tr.attr("myattr"),
+                    'code': selEle.val()
+                };
+                data.push(obj);
+            });
+            //保存至数据库中
+            var line = "SHT1"
+            var url = "/Service/MW_TRSLossHandler.ashx";
+            $.ajax({
+                url: url,
+                type: "post",
+                datatype: "json",
+                data: { "data": JSON.stringify(data) },
+                success: function (data) {
+                    if (data["status"] == 0) {
+                        var sUrl = "/Service/MW_MainTRSLossHandler.ashx?Line=" + line + "&Date=" + GetYMD(new Date().toDateString()) + "&Shift=" + GetShift(new Date());
+                        $.ajax({
+                            url: sUrl,
+                            type: "get",
+                            datatype: "json",
+                            success: function (sData) {
+                                var arr = [];
+                                for (var i = 0; i < sData.length; i++) {
+                                    var obj = sData[i];
+                                    arr.push([obj["Reason"], parseFloat(obj["tolTimeSpan"])]);
+                                }
+                                LoadMainTrsLoss(arr);
+                            },
+                            error: function () {
+                                //
+                            }
+                        });
+                    } else {
+                        //
+                    }
+
+                },
+                error: function () {
+                    //程序异常
+                }
+            });
+        }); 
+
+        //清除指定定时器对象
+        $(".stopBtn").click(function () {
+            var value = $(this).val();
+            if (value == "暂停") {
+                clearInterval(timerId);
+                $(this).val("启动");
+            } else {
+                //重新启动停机数据刷新
+                timerId = setInterval(LoadTrsLossData, 1000 * 30);
+                $(this).val("暂停");
+            }
+        }); 
+
+        //翻页 下一页
+        $(".nexBtn").click(function () {
+            pageIndex += 1;
+            if (pageIndex > pageCount) {
+                pageIndex = pageCount;
+            } else {
+                PageShow(pageIndex);
+            }
+        }); 
+
+        //翻页 上一页
+        $(".preBtn").click(function () {
+            pageIndex -= 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            } else {
+                PageShow(pageIndex);
+            }
+        });
+    });
+
+    function PageShow(pageIndex) {
+        var tr = $(".trsLoss tbody").find("tr");
+        tr.hide();
+        for (var i = (pageIndex - 1) * pageSize; i < pageIndex * pageSize; i++) {
+            $(tr[i]).show();
+        }
+    }
+
+    $(".trsBtn").click(function () {
+        $.jBox("iframe:/Pages/ShowTRSTrend.html", {
+            title: "TRS趋势记录",
+            width: 1100,
+            height: 660,
+            buttons: {}
+        });
+    });
+
+    $(".part3Btn").click(function () {
+        /*
+        $.jBox("iframe:ShowTRSLossOfParts.html", {
+            title: "前三班TRS记录",
+            width: 1120,
+            height: 500,
+            buttons: {}
+        });
+        */
+        alert("This part is now updating...");
+    });
+
+    $(".expBtn").click(function () {
+        $.jBox("iframe:/Pages/ExportTRSRecord.aspx?Line=SHT1", {
+            title: "导出停机记录",
+            width: 680,
+            height: 120,
+            buttons: {}
+        });
+    });
+    </script>
+</body>
+</html>

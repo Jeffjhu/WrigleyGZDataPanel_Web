@@ -1,0 +1,141 @@
+*{margin: 0; padding: 0; font-family: "微软雅黑";}
+body{/*background: #292c33;*/}
+.clear{clear: both;}
+.fg-box{width: 1366px; margin: 0 auto; background:url(../images/topBg.png) no-repeat #fff /*#292c33;*/}
+.fg-top{text-align: center; padding-top: 14px; position: relative;margin-bottom: 17px;}
+.fgTitle{color: #fff; font-size:40px;font-weight: normal;}
+.fg-det{margin-top: 30px; margin-bottom:40px }
+.fg-det span{color: #fff; font-size: 20px;}
+.fg-line{margin-left: 50px; margin-right: 50px;}
+.fg-stage{ width: 126px; height: 110px; position: absolute; right: 34px; bottom: -2px; border-radius: 5px 5px; background:#179dd6 ; text-align: center;}
+.fg-font{font-size: 30px; color: #fff; margin-top: 32px; display: block;*display: inline;*zoom:1;}
+.fg-stageFirst
+{
+    right:185px;
+}
+.fg-botFirst, .fg-botSecond
+{
+     width: 126px; position: absolute; right: 34px; bottom: -26px; text-align: center;color:#fff;
+}
+.fg-botSecond{right:185px;}
+
+.exLeft{width: 720px; float: left;}
+.exTit{display: inline-block;*display: inline;*zoom:1; font-size: 24px; color: #575757; margin-left: 24px;font-weight: normal;}
+.ex-titEn{font-size: 18px; color: #20a4dd; margin-left: 18px;}
+.outDet{display: inline-block;*display: inline;*zoom:1; vertical-align: middle; margin-left: 28px;}
+.grenItem{margin-bottom: 0px;}
+.grenItem span,.cyanItem span{ font-size: 12px; color:#575757;}
+.out-num{margin-right: 20px;}
+.grenItem .out-num{ color: #79bb5d;}
+.cyanItem .out-num{ color: #20a4dd;}
+
+.out-det{display: inline-block;*display: inline;*zoom:1; vertical-align:middle; margin-left: 30px;}
+.grenRect,.cyanRect{width: 14px; height: 14px; display: inline-block;*display: inline;*zoom:1; vertical-align: middle; border-radius: 3px 3px;}
+.od-tit{font-size: 12px; color:#575757; margin-left:10px;}
+.grenRect{ background:#79bb5d; margin-right: 30px;}
+.cyanRect{ background:#20a4dd;}
+
+.fg-colu{margin-top: 12px;}
+.fg-curve{width: 708px; margin-left: 10px; margin-top:12px}
+.curPic{width: 708px; margin-left: 10px;}
+.stopRect{width: 10px; height: 10px; border: 1px solid #fff; background:#79bb5d; margin-left: 25px; display: inline-block;*display: inline;*zoom:1; vertical-align: middle;}
+.coluDet{ margin-bottom: 8px;}
+.coluDet .out-tit{color: #575757; font-size: 12px;}
+
+.exRight{width: 620px; float: left; margin-left: 20px;}
+.loss-tit{font-size: 24px;color: #666; text-align: center; margin-bottom: 20px;}
+.rosDate{margin-bottom: 10px;height: auto;/*overflow: hidden;overflow-y: auto;*/}
+.rosTable tr td{color: #575757; font-size: 12px; padding: 3px 2px; border-left: 1px solid #CFD0D0; border-top: 1px solid #CFD0D0; text-align: center;}
+/*.rosTable tr td.tdLeft
+{
+    text-align: left;
+}*/
+.rosTable thead tr td{border-top: solid 1px;background: #F5F5F5;}
+.greenEnd{font-size: 20px; color: #666; margin-bottom: 8px;}
+.ASpeed,.SSpeed{color:#79bb5d}
+.minDuration, .maxDuration, .avgDuration{color:#79bb5d}
+.mttr, .mtbf, .mdt {color:#79bb5d}
+.trsBtn{width: 150px; height: 44px; border: none; background: url(../images/trs_btn_nor.png) no-repeat; margin-top: 15px; cursor: pointer;}
+.trsBtn:hover{background: url(../images/trs_btn_cur.png) no-repeat; }
+.part3Btn{width: 150px; height: 44px; border: none; background: url(../images/part3_btn_cur.png) no-repeat; margin-top: 15px; cursor: pointer;}
+
+select.rosDrop{
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: 1px solid #575757;
+  /*很关键：将默认的select选择框样式清除*/
+  /*appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;*/
+  background: none;
+  /*在选择框的最右侧中间显示小箭头图片*/
+  /*background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;*/
+  color: #1DACCF;
+  width:200px;
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+ /* padding-right: 14px;*/
+ }
+
+select.LineSelect {
+    width:100px;
+}
+
+select.rosSel{
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: none;
+  /*很关键：将默认的select选择框样式清除*/
+  /*appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;*/
+  background: none;
+  /*在选择框的最右侧中间显示小箭头图片*/
+  /*background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;*/
+  color: #1DACCF;
+  width:178px;
+  /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+ /* padding-right: 14px;*/
+ }
+
+select.downTimeClass
+{
+    width: 95px;
+}
+ /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+
+.pageHome{text-align: right; margin-bottom: 10px;}
+.pageBtn{border: none; color: #fff; font-size: 12px; margin-left: 5px; padding: 5px 8px; cursor: pointer; border-radius: 3px 3px;}
+.saveBtn{background: #22ade8;}
+.saveBtn:hover{background: #43B8EA;}
+.preBtn,.nexBtn{background: #79bb5d;}
+.preBtn:hover,.nexBtn:hover{background: #81D05F;}
+.stopBtn{background: #22ade8;}
+.stopBtn:hover{background: #43B8EA;}
+.expBtn{background: #22ade8;}
+.expBtn:hover{background: #43B8EA;}
+.navBtn{background: #22ade8;border: none; color: #fff; font-size: 14px; margin-left: 5px; padding: 5px 8px; cursor: pointer; border-radius: 3px 3px;width:160px;}
+.navBtn:hover{background: #43B8EA;}
+
+.compRate1 {
+    font-size:14px;text-align:center;font-weight:600;color:#802c2c;
+}
+
+.compRate2 {
+    font-size:14px;text-align:center;font-weight:600;color:#802c2c;
+}
+
+.compRate3{
+    font-size:14px;text-align:center;font-weight:600;color:#802c2c;
+}
+
+.txtDate {
+    font-size:12px;border:1px solid #575757;margin-left:4px;width:120px;
+}
+
+.btnExport {
+    font-size:12px;border:1px solid #575757; margin-left:6px; width:80px;height:20px;
+}
+
+.commonText {
+    font-size:12px;
+}
+
